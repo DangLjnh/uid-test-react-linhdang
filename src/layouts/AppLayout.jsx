@@ -1,26 +1,38 @@
-// import React from 'react';
 import { Layout, Menu } from 'antd';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const { Header, Content, Footer } = Layout;
 
 const AppLayout = ({ children }) => {
+  const location = useLocation();
+
+  // Define menu items using the `items` prop
+  const menuItems = [
+    {
+      key: '/',
+      label: <Link to="/">Home</Link>,
+    },
+    {
+      key: '/products',
+      label: <Link to="/products">Products</Link>,
+    },
+    {
+      key: '/create-product',
+      label: <Link to="/create-product">Create Product</Link>,
+    },
+  ];
+
   return (
     <Layout className="min-h-screen">
       <Header className="bg-white">
         <div className="max-w-7xl mx-auto">
-          <Menu mode="horizontal" className="border-b-0">
-            <Menu.Item key="home">
-              <Link to="/">Home</Link>
-            </Menu.Item>
-            <Menu.Item key="products">
-              <Link to="/products">Products</Link>
-            </Menu.Item>
-            <Menu.Item key="create-product">
-              <Link to="/create-product">Create Product</Link>
-            </Menu.Item>
-          </Menu>
+          <Menu
+            mode="horizontal"
+            className="border-b-0"
+            items={menuItems}
+            selectedKeys={[location.pathname]}
+          />
         </div>
       </Header>
       <Content className="flex-grow">
@@ -34,6 +46,7 @@ const AppLayout = ({ children }) => {
     </Layout>
   );
 };
+
 AppLayout.propTypes = {
   children: PropTypes.node.isRequired,
 };
