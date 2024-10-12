@@ -4,6 +4,7 @@ import { UploadOutlined } from '@ant-design/icons';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { formatCurrency, parseCurrency } from '../../helpers/utils';
+import withLoadingIndicator from '../../hoc/withLoadingIndicator';
 
 const { Option } = Select;
 
@@ -119,4 +120,6 @@ const CreateProduct = () => {
   );
 };
 
-export default CreateProduct;
+
+const CreateProductsWithLoadingIndicator = withLoadingIndicator(CreateProduct);
+export default CreateProductsWithLoadingIndicator;

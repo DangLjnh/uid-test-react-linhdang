@@ -3,6 +3,8 @@ import { useEffect, useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProducts } from '../../states/actions/productActions';
 import { Alert, Select, Spin, Table, Tag } from 'antd';
+import withLoadingIndicator from '../../hoc/withLoadingIndicator';
+
 
 const Products = () => {
   const dispatch = useDispatch();
@@ -104,4 +106,5 @@ const Products = () => {
   );
 };
 
-export default Products;
+const ProductsWithLoadingIndicator = withLoadingIndicator(Products);
+export default ProductsWithLoadingIndicator;
