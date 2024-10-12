@@ -1,0 +1,36 @@
+{
+    "products": [
+      {
+        "id": 1,
+        "title": "Wireless Headphones",
+        "description": "High-quality wireless headphones with noise-cancellation.",
+        "price": 150.00,
+        "media": [
+          "image1.jpg",
+          "image2.jpg"
+        ],
+        "tags": ["electronics", "audio", "wireless"],
+        "product_type": "Headphones"
+      },
+      {
+        "id": 2,
+        "title": "Smartphone",
+        "description": "Latest model smartphone with high-resolution display and powerful processor.",
+        "price": 899.99,
+        "media": [
+          "smartphone_front.jpg"
+        ],
+        "tags": ["electronics", "mobile", "smartphone"],
+        "product_type": "Mobile"
+      },
+      {
+        "id": 3,
+        "title": "Leather Wallet",
+        "description": "Premium quality leather wallet with multiple card slots.",
+        "price": 45.00,
+        "media": [
+          "wallet.jpg"
+        ]
+      }
+    ]
+  }

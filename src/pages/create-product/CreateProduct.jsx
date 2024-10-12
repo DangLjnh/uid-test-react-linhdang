@@ -3,7 +3,7 @@ import { Form, Input, InputNumber, Upload, Button, Select, message } from 'antd'
 import { UploadOutlined } from '@ant-design/icons';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import { validatePrice } from '../../helpers/validateForm';
+import { formatCurrency, parseCurrency } from '../../helpers/utils';
 
 const { Option } = Select;
 
@@ -56,11 +56,14 @@ const CreateProduct = () => {
           <Form.Item
             name="price"
             label="Price"
-            rules={[{ validator: validatePrice }]}
+            rules={[                                                                                                         
+                { required: true, message: 'Please input the product price!' },                                                
+                { type: 'number', min: 0, message: 'Price must be a positive number!' }                                        
+            ]}
           >
             <InputNumber
-              formatter={value => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-              parser={value => value.replace(/\$\s?|(,*)/g, '')}
+              formatter={formatCurrency}
+              parser={parseCurrency}
               style={{ width: '100%' }}
             />
           </Form.Item>
