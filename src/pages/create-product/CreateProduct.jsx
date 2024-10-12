@@ -110,11 +110,9 @@ const CreateProduct = () => {
             </Select>
           </Form.Item>
 
-          <Form.Item>
-            <Button type="primary" htmlType="submit" className="w-full">
-              Create Product
-            </Button>
-          </Form.Item>
+        <Button type="primary" htmlType="submit" className="w-full">
+            Create Product
+        </Button>
         </Form>
       </div>
     </>
