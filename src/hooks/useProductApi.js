@@ -1,74 +1,75 @@
 import { useState } from 'react';
 import axios from 'axios';
 
-const API_BASE_URL = "http://localhost:3000";
-
+const API_URL = 'http://localhost:3000';
 const useProductApi = () => {
-  const [loading, setLoading] = useState(false);
+  const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [data, setData] = useState([]);
 
-  // Function to handle async calls
-  const handleApiCall = async (apiCall) => {
-    setLoading(true);
+  // Reusable function for making API requests with error handling
+  const requestHandler = async (callback) => {
+    setIsLoading(true);
     setError(null);
     try {
-      const response = await apiCall();
-      setData(response.data);
+      const result = await callback();
+      return result;
     } catch (err) {
-      setError(err);
+      setError(err.message);
+      throw err;
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   };
 
   // Fetch all products
   const fetchProducts = () => {
-    handleApiCall(() => axios.get(`${API_BASE_URL}/products`));
+    return requestHandler(async () => {
+      const response = await axios.get(`${API_URL}/products`);
+      setProducts(response.data);
+    });
   };
 
-  // Fetch a single product by id
+  // Fetch a single product by ID
   const fetchProduct = (id) => {
-    handleApiCall(() => axios.get(`${API_BASE_URL}/products/${id}`));
+    return requestHandler(async () => {
+      const response = await axios.get(`${API_URL}/products/${id}`);
+      return response.data;
+    });
   };
 
   // Create a new product
   const createProduct = (newProduct) => {
-    handleApiCall(() => axios.post(`${API_BASE_URL}/products`, newProduct));
+    return requestHandler(async () => {
+      const response = await axios.post(`${API_URL}/products`, newProduct, {
+        headers: { 'Content-Type': 'application/json' },
+      });
+      await fetchProducts();
+      return response.data;
+    });
   };
 
-  // Update a product by id
+  // Update an existing product
   const updateProduct = (id, updatedProduct) => {
-    handleApiCall(() => axios.put(`${API_BASE_URL}/products/${id}`, updatedProduct));
+    return requestHandler(async () => {
+      const response = await axios.put(`${API_URL}/products/${id}`, updatedProduct, {
+        headers: { 'Content-Type': 'application/json' },
+      });
+        await fetchProducts();
+        return response.data;
+    });
   };
 
-  // Delete a product by id
+  // Delete a product by ID
   const deleteProduct = (id) => {
-    handleApiCall(() => axios.delete(`${API_BASE_URL}/products/${id}`));
+    return requestHandler(async () => {
+        const response = await axios.delete(`${API_URL}/products/${id}`);
+        await fetchProducts();
+        return response.data;
+    });
   };
 
-  // Bulk update products
-  const bulkUpdateProducts = (updatedProducts) => {
-    handleApiCall(() => axios.put(`${API_BASE_URL}/products/bulk-update`, updatedProducts));
-  };
-
-  // Bulk delete products
-  const bulkDeleteProducts = (ids) => {
-    handleApiCall(() => axios.post(`${API_BASE_URL}/products/bulk-delete`, { ids }));
-  };
-
-  return {
-    data,
-    loading,
-    error,
-    fetchProducts,
-    fetchProduct,
-    createProduct,
-    updateProduct,
-    deleteProduct,
-    bulkUpdateProducts,
-    bulkDeleteProducts,
-  };
+  return { products, isLoading, error, fetchProducts, fetchProduct, createProduct, updateProduct, deleteProduct };
 };
 
 export default useProductApi;

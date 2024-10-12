@@ -1,155 +1,203 @@
 {
-    "products": [
-      {
-        "id": 1,
-        "title": "Wireless Headphones",
-        "description": "High-quality wireless headphones with noise-cancellation.",
-        "price": 150.00,
-        "media": [
-          "image1.jpg",
-          "image2.jpg"
-        ],
-        "tags": ["electronics", "audio", "wireless"],
-        "product_type": "Headphones"
-      },
-      {
-        "id": 2,
-        "title": "Smartphone",
-        "description": "Latest model smartphone with high-resolution display and powerful processor.",
-        "price": 899.99,
-        "media": [
-          "smartphone_front.jpg"
-        ],
-        "tags": ["electronics", "mobile", "smartphone"],
-        "product_type": "Mobile"
-      },
-      {
-        "id": 3,
-        "title": "Leather Wallet",
-        "description": "Premium quality leather wallet with multiple card slots.",
-        "price": 45.00,
-        "media": [
-          "wallet.jpg"
-        ]
-      },
-      {
-        "id": 4,
-        "title": "Portable Speaker",
-        "description": "Portable Bluetooth speaker with high-quality sound output.",
-        "price": 79.99,
-        "media": [
-          "speaker_front.jpg",
-          "speaker_back.jpg"
-        ],
-        "tags": ["electronics", "audio", "portable"],
-        "product_type": "Speaker"
-      },
-      {
-        "id": 5,
-        "title": "Laptop Bag",
-        "description": "Stylish laptop bag with multiple compartments and padded shoulder straps.",
-        "price": 65.00,
-        "media": [
-          "laptop_bag_front.jpg",
-          "laptop_bag_back.jpg"
-        ],
-        "tags": ["accessories", "bags", "laptop"],
-        "product_type": "Bag"
-      },
-      {
-        "id": 6,
-        "title": "Smartwatch",
-        "description": "Smartwatch with fitness tracking and heart rate monitoring features.",
-        "price": 199.99,
-        "media": [
-          "smartwatch_front.jpg",
-          "smartwatch_side.jpg"
-        ],
-        "tags": ["electronics", "wearable", "smartwatch"],
-        "product_type": "Wearable"
-      },
-      {
-        "id": 7,
-        "title": "Sunglasses",
-        "description": "Designer sunglasses with UV protection and polarized lenses.",
-        "price": 99.00,
-        "media": [
-          "sunglasses.jpg"
-        ],
-        "tags": ["accessories", "eyewear", "sunglasses"],
-        "product_type": "Eyewear"
-      },
-      {
-        "id": 8,
-        "title": "Backpack",
-        "description": "Durable backpack with water-resistant material and adjustable straps.",
-        "price": 75.00,
-        "media": [
-          "backpack_front.jpg",
-          "backpack_side.jpg"
-        ],
-        "tags": ["accessories", "bags", "backpack"],
-        "product_type": "Bag"
-      },
-      {
-        "id": 9,
-        "title": "Fitness Tracker",
-        "description": "Fitness tracker with step counting and sleep monitoring features.",
-        "price": 49.99,
-        "media": [
-          "fitness_tracker_front.jpg",
-          "fitness_tracker_side.jpg"
-        ],
-        "tags": ["electronics", "wearable", "fitness"],
-        "product_type": "Wearable"
-      },
-      {
-        "id": 10,
-        "title": "Gaming Mouse",
-        "description": "High-performance gaming mouse with customizable RGB lighting.",
-        "price": 69.99,
-        "media": [
-          "gaming_mouse_front.jpg",
-          "gaming_mouse_side.jpg"
-        ],
-        "tags": ["electronics", "gaming", "mouse"],
-        "product_type": "Mouse"
-      },
-      {
-        "id": 11,
-        "title": "Coffee Maker",
-        "description": "Automatic coffee maker with programmable brewing options.",
-        "price": 129.00,
-        "media": [
-          "coffee_maker_front.jpg",
-          "coffee_maker_side.jpg"
-        ],
-        "tags": ["home", "kitchen", "coffee"],
-        "product_type": "Appliance"
-      },
-      {
-        "id": 12,
-        "title": "Bluetooth Earbuds",
-        "description": "Wireless Bluetooth earbuds with noise-cancellation and touch controls.",
-        "price": 99.99,
-        "media": [
-          "earbuds_front.jpg",
-          "earbuds_side.jpg"
-        ],
-        "tags": ["electronics", "audio", "wireless"],
-        "product_type": "Earbuds"
-      },
-      {
-        "id": 13,
-        "title": "Digital Camera",
-        "description": "Compact digital camera with high-resolution sensor and optical zoom.",
-        "price": 299.00,
-        "media": [
-          "camera_front.jpg",
-          "camera_back.jpg"
-        ],
-        "tags": ["electronics", "photography", "camera"],
-        "product_type": "Camera"
-      }
-    ]
-  }
+  "products": [
+    {
+      "id": 1,
+      "title": "Wireless Headphones",
+      "description": "High-quality wireless headphones with noise-cancellation.",
+      "price": 150,
+      "media": [
+        "image1.jpg",
+        "image2.jpg"
+      ],
+      "tags": [
+        "electronics",
+        "audio",
+        "wireless"
+      ],
+      "product_type": "Headphones"
+    },
+    {
+      "id": 2,
+      "title": "Smartphone",
+      "description": "Latest model smartphone with high-resolution display and powerful processor.",
+      "price": 899.99,
+      "media": [
+        "smartphone_front.jpg"
+      ],
+      "tags": [
+        "electronics",
+        "mobile",
+        "smartphone"
+      ],
+      "product_type": "Mobile"
+    },
+    {
+      "id": 3,
+      "title": "Leather Wallet",
+      "description": "Premium quality leather wallet with multiple card slots.",
+      "price": 45,
+      "media": [
+        "wallet.jpg"
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Portable Speaker",
+      "description": "Portable Bluetooth speaker with high-quality sound output.",
+      "price": 79.99,
+      "media": [
+        "speaker_front.jpg",
+        "speaker_back.jpg"
+      ],
+      "tags": [
+        "electronics",
+        "audio",
+        "portable"
+      ],
+      "product_type": "Speaker"
+    },
+    {
+      "id": 5,
+      "title": "Laptop Bag",
+      "description": "Stylish laptop bag with multiple compartments and padded shoulder straps.",
+      "price": 65,
+      "media": [
+        "laptop_bag_front.jpg",
+        "laptop_bag_back.jpg"
+      ],
+      "tags": [
+        "accessories",
+        "bags",
+        "laptop"
+      ],
+      "product_type": "Bag"
+    },
+    {
+      "id": 6,
+      "title": "Smartwatch",
+      "description": "Smartwatch with fitness tracking and heart rate monitoring features.",
+      "price": 199.99,
+      "media": [
+        "smartwatch_front.jpg",
+        "smartwatch_side.jpg"
+      ],
+      "tags": [
+        "electronics",
+        "wearable",
+        "smartwatch"
+      ],
+      "product_type": "Wearable"
+    },
+    {
+      "id": 7,
+      "title": "Sunglasses",
+      "description": "Designer sunglasses with UV protection and polarized lenses.",
+      "price": 99,
+      "media": [
+        "sunglasses.jpg"
+      ],
+      "tags": [
+        "accessories",
+        "eyewear",
+        "sunglasses"
+      ],
+      "product_type": "Eyewear"
+    },
+    {
+      "id": 8,
+      "title": "Backpack",
+      "description": "Durable backpack with water-resistant material and adjustable straps.",
+      "price": 75,
+      "media": [
+        "backpack_front.jpg",
+        "backpack_side.jpg"
+      ],
+      "tags": [
+        "accessories",
+        "bags",
+        "backpack"
+      ],
+      "product_type": "Bag"
+    },
+    {
+      "id": 9,
+      "title": "Fitness Tracker",
+      "description": "Fitness tracker with step counting and sleep monitoring features.",
+      "price": 49.99,
+      "media": [
+        "fitness_tracker_front.jpg",
+        "fitness_tracker_side.jpg"
+      ],
+      "tags": [
+        "electronics",
+        "wearable",
+        "fitness"
+      ],
+      "product_type": "Wearable"
+    },
+    {
+      "id": 10,
+      "title": "Gaming Mouse",
+      "description": "High-performance gaming mouse with customizable RGB lighting.",
+      "price": 69.99,
+      "media": [
+        "gaming_mouse_front.jpg",
+        "gaming_mouse_side.jpg"
+      ],
+      "tags": [
+        "electronics",
+        "gaming",
+        "mouse"
+      ],
+      "product_type": "Mouse"
+    },
+    {
+      "id": 11,
+      "title": "Coffee Maker",
+      "description": "Automatic coffee maker with programmable brewing options.",
+      "price": 129,
+      "media": [
+        "coffee_maker_front.jpg",
+        "coffee_maker_side.jpg"
+      ],
+      "tags": [
+        "home",
+        "kitchen",
+        "coffee"
+      ],
+      "product_type": "Appliance"
+    },
+    {
+      "id": 12,
+      "title": "Bluetooth Earbuds",
+      "description": "Wireless Bluetooth earbuds with noise-cancellation and touch controls.",
+      "price": 99.99,
+      "media": [
+        "earbuds_front.jpg",
+        "earbuds_side.jpg"
+      ],
+      "tags": [
+        "electronics",
+        "audio",
+        "wireless"
+      ],
+      "product_type": "Earbuds"
+    },
+    {
+      "id": 13,
+      "title": "Digital Camera",
+      "description": "Compact digital camera with high-resolution sensor and optical zoom.",
+      "price": 299,
+      "media": [
+        "camera_front.jpg",
+        "camera_back.jpg"
+      ],
+      "tags": [
+        "electronics",
+        "photography",
+        "camera"
+      ],
+      "product_type": "Camera"
+    }
+  ]
+}
