@@ -31,6 +31,42 @@
         "media": [
           "wallet.jpg"
         ]
+      },
+      {
+        "id": 4,
+        "title": "Portable Speaker",
+        "description": "Portable Bluetooth speaker with high-quality sound output.",
+        "price": 79.99,
+        "media": [
+          "speaker_front.jpg",
+          "speaker_back.jpg"
+        ],
+        "tags": ["electronics", "audio", "portable"],
+        "product_type": "Speaker"
+      },
+      {
+        "id": 5,
+        "title": "Laptop Bag",
+        "description": "Stylish laptop bag with multiple compartments and padded shoulder straps.",
+        "price": 65.00,
+        "media": [
+          "laptop_bag_front.jpg",
+          "laptop_bag_back.jpg"
+        ],
+        "tags": ["accessories", "bags", "laptop"],
+        "product_type": "Bag"
+      },
+      {
+        "id": 6,
+        "title": "Smartwatch",
+        "description": "Smartwatch with fitness tracking and heart rate monitoring features.",
+        "price": 199.99,
+        "media": [
+          "smartwatch_front.jpg",
+          "smartwatch_side.jpg"
+        ],
+        "tags": ["electronics", "wearable", "smartwatch"],
+        "product_type": "Wearable"
       }
     ]
   }
