@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import cloudinary from '../libs/cloudiary';
 import axios from 'axios';
+import { CLOUDINARY_URL } from '../environments/variables';
 
 const useUploadMedia = () => {
   const [state, setState] = useState({
@@ -18,7 +19,7 @@ const useUploadMedia = () => {
     formData.append('file', file.originFileObj || file);
     formData.append('upload_preset', 'uid_preset');
 
-    const response = await axios.post(`https://api.cloudinary.com/v1_1/${cloudinary.config().cloud_name}/upload`, formData);
+    const response = await axios.post(`${CLOUDINARY_URL}/${cloudinary.config().cloud_name}/upload`, formData);
 
     return response.data.secure_url;
   };

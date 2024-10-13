@@ -14,7 +14,7 @@ const withLoadingIndicator = (WrappedComponent) => {
   };
 
   WithLoadingIndicator.propTypes = {
-    loading: PropTypes.bool.isRequired,
+    loading: PropTypes.bool,
   };
 
   WithLoadingIndicator.displayName = 'WithLoadingIndicator';

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
+import { API_URL } from '../environments/variables';
 
-const API_URL = 'http://localhost:3000';
 const useProductApi = () => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);

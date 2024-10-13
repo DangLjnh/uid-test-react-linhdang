@@ -158,9 +158,8 @@
       ]
     },
     {
-      "id": "5a69",
       "title": "Iphone 16 pro",
-      "description": "<p><img src=\"https://res.cloudinary.com/drgcxsgzc/image/upload/v1728795924/q60vuaaehpxffei7xsdd.jpg\"></p><p><strong>iphone 16 pro</strong></p>",
+      "description": "<p><img src=\"https://res.cloudinary.com/drgcxsgzc/image/upload/v1728795924/q60vuaaehpxffei7xsdd.jpg\"></p><p><strong>iphone 16 pro max</strong></p>",
       "price": 9999,
       "media": [
         "https://res.cloudinary.com/drgcxsgzc/image/upload/v1728795974/vwpbglh5hrajeklrrcdc.jpg"
@@ -171,6 +170,20 @@
         "accessories",
         "eyewear",
         "backpack"
+      ],
+      "id": "5a69"
+    },
+    {
+      "id": "9509",
+      "title": "Shirt",
+      "description": "<p>T-shirt</p><p><img src=\"https://res.cloudinary.com/drgcxsgzc/image/upload/v1728797409/lein7qj4j8m355tzdjzu.webp\">222</p>",
+      "price": 2222,
+      "media": [
+        "https://res.cloudinary.com/drgcxsgzc/image/upload/v1728797422/ttszvjdngvvhmk6kg2zc.webp"
+      ],
+      "product_type": "Appliance",
+      "tags": [
+        "sunglasses"
       ]
     }
   ]
