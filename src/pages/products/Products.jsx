@@ -6,16 +6,16 @@ import withLoadingIndicator from '../../hoc/withLoadingIndicator';
 import useProductApi from '../../hooks/useProductApi';
 import { useNavigate } from 'react-router-dom';
 
-
 const Products = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const {isLoading, error: errorProduct, deleteProduct } = useProductApi();
+  const { isLoading, error: errorProduct, deleteProduct } = useProductApi();
 
   const { products, loading, error } = useSelector((state) => state.products);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [selectedTags, setSelectedTags] = useState([]);
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  const [isDeleteAllDisabled, setIsDeleteAllDisabled] = useState(true);
 
   const fetchProductList = useCallback(() => {
     dispatch(fetchProducts());
@@ -29,7 +29,7 @@ const Products = () => {
     if (selectedTags.length === 0) {
       setFilteredProducts(products);
     } else {
-      setFilteredProducts(products.filter(product => 
+      setFilteredProducts(products.filter(product =>
         selectedTags.every(tag => product.tags && product.tags.includes(tag))
       ));
     }
@@ -40,23 +40,42 @@ const Products = () => {
       title: 'Are you sure you want to delete this product?',
       onOk: async () => {
         await deleteProduct(id);
-        if(!isLoading) {
+        if (!isLoading) {
           fetchProductList();
         }
-        if(errorProduct) {
+        if (errorProduct) {
           message.error('Error delete product. Please try again!');
         }
       },
     });
   };
 
+  const handleDeleteAll = () => {
+    Modal.confirm({
+      title: 'Are you sure you want to delete all selected products?',
+      onOk: async () => {
+        for (const id of selectedRowKeys) {
+          await deleteProduct(id);
+        }
+        if (!isLoading) {
+          fetchProductList();
+        }
+        if (errorProduct) {
+          message.error('Error deleting products. Please try again!');
+        }
+        setSelectedRowKeys([]);
+        setIsDeleteAllDisabled(true);
+      },
+    });
+  };
+
   const handleUpdate = (id) => {
     navigate(`/update-product/${id}`);
-    console.log(`Update product with id: ${id}`);
   };
 
   const handleSelectChange = (selectedRowKeys) => {
     setSelectedRowKeys(selectedRowKeys);
+    setIsDeleteAllDisabled(selectedRowKeys.length === 0);
   };
 
   const columns = [
@@ -135,10 +154,10 @@ const Products = () => {
   return (
     <div className="max-w-7xl mx-auto">
       <h2 className="text-2xl font-bold mb-6">Products</h2>
-      <div className="mb-4">
+      <div className="mb-4 flex justify-between items-center">
         <Select
           mode="multiple"
-          style={{ width: '100%' }}
+          style={{ width: '80%' }}
           placeholder="Filter by tags"
           onChange={handleTagChange}
         >
@@ -146,6 +165,14 @@ const Products = () => {
             <Select.Option key={tag} value={tag}>{tag}</Select.Option>
           ))}
         </Select>
+        <Button
+          type="link"
+          danger
+          disabled={isDeleteAllDisabled}
+          onClick={handleDeleteAll}
+        >
+          Delete All
+        </Button>
       </div>
       <Table
         columns={columns}
