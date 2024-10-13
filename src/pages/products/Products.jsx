@@ -1,18 +1,21 @@
 import { useEffect, useCallback, useState } from 'react';
-// import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProducts } from '../../states/actions/productActions';
-import { Alert, Select, Spin, Table, Tag } from 'antd';
+import { Alert, Select, Spin, Table, Tag, Image, Button, Modal, message } from 'antd';
 import withLoadingIndicator from '../../hoc/withLoadingIndicator';
+import useProductApi from '../../hooks/useProductApi';
+import { useNavigate } from 'react-router-dom';
 
 
 const Products = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const {isLoading, error: errorProduct, deleteProduct } = useProductApi();
+
   const { products, loading, error } = useSelector((state) => state.products);
   const [filteredProducts, setFilteredProducts] = useState([]);
-  console.log(products);
-  
   const [selectedTags, setSelectedTags] = useState([]);
+  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
   const fetchProductList = useCallback(() => {
     dispatch(fetchProducts());
@@ -32,7 +35,40 @@ const Products = () => {
     }
   }, [products, selectedTags]);
 
+  const handleDelete = (id) => {
+    Modal.confirm({
+      title: 'Are you sure you want to delete this product?',
+      onOk: async () => {
+        await deleteProduct(id);
+        if(!isLoading) {
+          fetchProductList();
+        }
+        if(errorProduct) {
+          message.error('Error delete product. Please try again!');
+        }
+      },
+    });
+  };
+
+  const handleUpdate = (id) => {
+    navigate(`/update-product/${id}`);
+    console.log(`Update product with id: ${id}`);
+  };
+
+  const handleSelectChange = (selectedRowKeys) => {
+    setSelectedRowKeys(selectedRowKeys);
+  };
+
   const columns = [
+    {
+      title: 'Image',
+      dataIndex: 'media',
+      key: 'media',
+      render: media => {
+        const image = media[0]; // Get the first item in the array
+        return <Image src={image} className='object-cover' alt={image} width={100} height={100} />;
+      },
+    },
     {
       title: 'Product Title',
       dataIndex: 'title',
@@ -62,6 +98,16 @@ const Products = () => {
             </Tag>
           ))}
         </>
+      ),
+    },
+    {
+      title: 'Actions',
+      key: 'actions',
+      render: (_, record) => (
+        <div className='flex flex-row gap-3'>
+          <Button type="default" onClick={() => handleUpdate(record.id)} disabled={isLoading} loading={isLoading}>Update</Button>
+          <Button type="default" danger onClick={() => handleDelete(record.id)} disabled={isLoading} loading={isLoading}>Delete</Button>
+        </div>
       ),
     },
   ];
@@ -101,7 +147,15 @@ const Products = () => {
           ))}
         </Select>
       </div>
-      <Table columns={columns} dataSource={filteredProducts} rowKey="id" />
+      <Table
+        columns={columns}
+        dataSource={filteredProducts}
+        rowKey="id"
+        rowSelection={{
+          selectedRowKeys,
+          onChange: handleSelectChange,
+        }}
+      />
     </div>
   );
 };
