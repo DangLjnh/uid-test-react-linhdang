@@ -1,4 +1,3 @@
-// states/reducers/productReducer.js
 const initialState = {
     products: [],
     loading: false,

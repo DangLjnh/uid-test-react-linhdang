@@ -3,12 +3,12 @@ import { Form, Input, InputNumber, Upload, Button, Select, message } from 'antd'
 import { UploadOutlined } from '@ant-design/icons';
 import { formatCurrency, parseCurrency } from '../../helpers/utils';
 import withLoadingIndicator from '../../hoc/withLoadingIndicator';
-import useProductApi from '../../hooks/useProductApi';
+import useLocalStorageProduct from '../../hooks/useLocalStorageProduct';
 import useUploadMedia from '../../hooks/useUploadMedia';
 import { useNavigate, useParams } from 'react-router-dom';
 import RichTextArea from '../../components/richTextArea';
 import { validateUploadImage } from '../../helpers/validateForm';
-
+import { v4 } from 'uuid';
 
 const { Option } = Select;
 
@@ -16,7 +16,7 @@ const UpdateProduct = () => {
   const [form] = Form.useForm();
   const { id } = useParams();
   const navigate = useNavigate();
-  const { products, isLoading, error, fetchProduct, updateProduct, fetchProducts } = useProductApi();
+  const { products, isLoading, error, fetchProduct, updateProduct, fetchProducts } =useLocalStorageProduct();
   const { uploadMedia, uploadedMediaUrls } = useUploadMedia();
 
   const [fileList, setFileList] = useState([]);
@@ -30,27 +30,25 @@ const UpdateProduct = () => {
   useEffect(() => {
     const loadProduct = async () => {
       const product = await fetchProduct(id);
-      form.setFieldsValue({
-        title: product.title,
-        description: product.description,
-        price: product.price,
-        media: product.media,
-        product_type: product.product_type,
-        tags: product.tags,
-      });
-      const fileListWithBase64 = await Promise.all(product.media.map(async (url, index) => {
-        const base64 = await convertUrlToBase64(url);
+      const fileProducts = await Promise.all(product.media.map(async (url, index) => {
         return {
-          uid: `rc-upload-1728793302862-${index}`,
-          percent: 0,
+          uid: `rc-upload-${v4()}`,
           name: `image${index}`,
           status: 'done',
           url,
           type: "image/jpeg",
-          thumbUrl: base64,
+          thumbUrl: url,
         };
       }));
-      setFileList(fileListWithBase64);     
+      form.setFieldsValue({
+        title: product.title,
+        description: product.description,
+        price: product.price,
+        media: fileProducts,
+        product_type: product.product_type,
+        tags: product.tags,
+      });
+      setFileList(fileProducts);     
     };
     loadProduct();
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -116,17 +114,6 @@ const UpdateProduct = () => {
     setProductTypes(uniqueProductTypes);
     setProductTags(uniqueTags);
   }, [uniqueProductTypes, uniqueTags]);
-
-  const convertUrlToBase64 = async (url) => {
-    const response = await fetch(url);
-    const blob = await response.blob();
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onloadend = () => resolve(reader.result);
-      reader.onerror = reject;
-      reader.readAsDataURL(blob);
-    });
-  };
 
   return (
     <>

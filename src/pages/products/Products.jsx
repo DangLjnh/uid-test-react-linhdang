@@ -1,6 +1,6 @@
 import { useEffect, useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchProducts } from '../../states/actions/productActions';
+import { fetchProducts } from '../../states/actions/localStorageProductAction';
 import { Alert, Select, Spin, Table, Tag, Image, Button, Modal, message } from 'antd';
 import withLoadingIndicator from '../../hoc/withLoadingIndicator';
 import useProductApi from '../../hooks/useProductApi';
@@ -11,7 +11,7 @@ const Products = () => {
   const navigate = useNavigate();
   const { isLoading, error: errorProduct, deleteProduct } = useProductApi();
 
-  const { products, loading, error } = useSelector((state) => state.products);
+  const { products, loading, error } = useSelector((state) => state.localStorageProducts);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [selectedTags, setSelectedTags] = useState([]);
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
@@ -27,11 +27,15 @@ const Products = () => {
 
   useEffect(() => {
     if (selectedTags.length === 0) {
-      setFilteredProducts(products);
+      if(products.length > 0) {
+        setFilteredProducts(products);
+      }
     } else {
-      setFilteredProducts(products.filter(product =>
-        selectedTags.every(tag => product.tags && product.tags.includes(tag))
-      ));
+      if(products.length > 0) {
+        setFilteredProducts(products.filter(product =>
+          selectedTags.every(tag => product.tags && product.tags.includes(tag))
+        ));
+      }
     }
   }, [products, selectedTags]);
 
@@ -131,7 +135,7 @@ const Products = () => {
     },
   ];
 
-  const allTags = [...new Set(products.flatMap(product => product.tags).filter(tag => tag != null))];
+  const allTags = products.length > 0 ? [...new Set(products.flatMap(product => product.tags).filter(tag => tag != null))] : [];
 
   const handleTagChange = (selectedTags) => {
     setSelectedTags(selectedTags);

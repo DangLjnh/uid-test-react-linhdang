@@ -3,7 +3,7 @@ import { Form, Input, InputNumber, Upload, Button, Select, message } from 'antd'
 import { UploadOutlined } from '@ant-design/icons';
 import { formatCurrency, parseCurrency } from '../../helpers/utils';
 import withLoadingIndicator from '../../hoc/withLoadingIndicator';
-import useProductApi from '../../hooks/useProductApi';
+import useLocalStorageProduct from '../../hooks/useLocalStorageProduct';
 import useUploadMedia from '../../hooks/useUploadMedia';
 import RichTextArea from '../../components/richTextArea';
 import { validateUploadImage } from '../../helpers/validateForm';
@@ -12,7 +12,7 @@ const { Option } = Select;
 
 const CreateProduct = () => {
   const [form] = Form.useForm();
-  const { products, isLoading, error, fetchProducts, createProduct } = useProductApi();
+  const { products, isLoading, error, fetchProducts, createProduct } = useLocalStorageProduct();
   const { uploadMedia, uploadedMediaUrls } = useUploadMedia();
 
   const [fileList, setFileList] = useState([]);
