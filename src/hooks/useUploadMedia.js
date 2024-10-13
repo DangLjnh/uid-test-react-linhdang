@@ -13,22 +13,23 @@ const useUploadMedia = () => {
 
     try {
       for (const file of mediaFiles) {
-        const formData = new FormData();
-        formData.append('file', file.originFileObj);
-        formData.append('upload_preset', 'uid_preset');
-
-        const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudinary.config().cloud_name}/upload`, {
-          method: 'POST',
-          body: formData
-        });
-
-        const data = await response.json();
-        console.log("🚀 ~ uploadMedia ~ data:", data)
-        urls.push(data.secure_url);
+        if(typeof file === 'string') {
+            urls.push(file);
+        } else {
+            const formData = new FormData();
+            formData.append('file', file.originFileObj);
+            formData.append('upload_preset', 'uid_preset');
+    
+            const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudinary.config().cloud_name}/upload`, {
+              method: 'POST',
+              body: formData
+            });
+    
+            const data = await response.json();
+            urls.push(data.secure_url);
+        }
       }
-      console.log(urls);
       setUploadedMediaUrls(urls);
-      console.log("🚀 ~ uploadMedia ~ uploadedMediaUrls:", uploadedMediaUrls);
       
     } catch (err) {
       setError(err.message);
