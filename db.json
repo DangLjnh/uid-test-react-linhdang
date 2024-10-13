@@ -1,62 +1,6 @@
 {
   "products": [
     {
-      "id": "2",
-      "title": "Smartphone",
-      "description": "Latest model smartphone with high-resolution display and powerful processor.",
-      "price": 899.99,
-      "media": [
-        "smartphone_front.jpg"
-      ],
-      "tags": [
-        "electronics",
-        "mobile",
-        "smartphone"
-      ],
-      "product_type": "Mobile"
-    },
-    {
-      "id": "3",
-      "title": "Leather Wallet",
-      "description": "Premium quality leather wallet with multiple card slots.",
-      "price": 45,
-      "media": [
-        "wallet.jpg"
-      ]
-    },
-    {
-      "id": "4",
-      "title": "Portable Speaker",
-      "description": "Portable Bluetooth speaker with high-quality sound output.",
-      "price": 79.99,
-      "media": [
-        "speaker_front.jpg",
-        "speaker_back.jpg"
-      ],
-      "tags": [
-        "electronics",
-        "audio",
-        "portable"
-      ],
-      "product_type": "Speaker"
-    },
-    {
-      "id": "5",
-      "title": "Laptop Bag",
-      "description": "Stylish laptop bag with multiple compartments and padded shoulder straps.",
-      "price": 65,
-      "media": [
-        "laptop_bag_front.jpg",
-        "laptop_bag_back.jpg"
-      ],
-      "tags": [
-        "accessories",
-        "bags",
-        "laptop"
-      ],
-      "product_type": "Bag"
-    },
-    {
       "id": "6",
       "title": "Smartwatch",
       "description": "Smartwatch with fitness tracking and heart rate monitoring features.",
@@ -211,6 +155,22 @@
         "electronics",
         "audio",
         "wireless"
+      ]
+    },
+    {
+      "id": "5a69",
+      "title": "Iphone 16 pro",
+      "description": "<p><img src=\"https://res.cloudinary.com/drgcxsgzc/image/upload/v1728795924/q60vuaaehpxffei7xsdd.jpg\"></p><p><strong>iphone 16 pro</strong></p>",
+      "price": 9999,
+      "media": [
+        "https://res.cloudinary.com/drgcxsgzc/image/upload/v1728795974/vwpbglh5hrajeklrrcdc.jpg"
+      ],
+      "product_type": "Camera",
+      "tags": [
+        "smartwatch",
+        "accessories",
+        "eyewear",
+        "backpack"
       ]
     }
   ]

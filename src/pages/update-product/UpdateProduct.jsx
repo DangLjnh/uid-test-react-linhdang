@@ -1,13 +1,13 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Form, Input, InputNumber, Upload, Button, Select, message } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
 import { formatCurrency, parseCurrency } from '../../helpers/utils';
 import withLoadingIndicator from '../../hoc/withLoadingIndicator';
 import useProductApi from '../../hooks/useProductApi';
 import useUploadMedia from '../../hooks/useUploadMedia';
 import { useNavigate, useParams } from 'react-router-dom';
+import RichTextArea from '../../components/richTextArea';
+
 
 const { Option } = Select;
 
@@ -24,6 +24,7 @@ const UpdateProduct = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isMediaUploaded, setIsMediaUploaded] = useState(false);
   const [dataForm, setDataForm] = useState({});
+  const [richTextValue, setRichTextValue] = useState('');
 
   useEffect(() => {
     const loadProduct = async () => {
@@ -150,7 +151,7 @@ const UpdateProduct = () => {
             label="Description"
             rules={[{ required: true, message: 'Please input the product description!' }]}
           >
-            <ReactQuill theme="snow" />
+            <RichTextArea onChange={setRichTextValue} value={richTextValue} />
           </Form.Item>
 
           <Form.Item

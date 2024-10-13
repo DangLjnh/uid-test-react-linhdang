@@ -1,12 +1,11 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Form, Input, InputNumber, Upload, Button, Select, message } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
 import { formatCurrency, parseCurrency } from '../../helpers/utils';
 import withLoadingIndicator from '../../hoc/withLoadingIndicator';
 import useProductApi from '../../hooks/useProductApi';
 import useUploadMedia from '../../hooks/useUploadMedia';
+import RichTextArea from '../../components/richTextArea';
 
 const { Option } = Select;
 
@@ -21,6 +20,7 @@ const CreateProduct = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isMediaUploaded, setIsMediaUploaded] = useState(false);
   const [dataForm, setDataForm] = useState({});
+  const [richTextArea, setRichTextValue] = useState('');
 
   useEffect(() => {
     fetchProducts();
@@ -29,20 +29,19 @@ const CreateProduct = () => {
 
   useEffect(() => {
     if (isMediaUploaded) {
-        dataForm.media = uploadedMediaUrls;
-        createProduct(dataForm);
-        setIsSubmitting(isLoading);
-        setIsMediaUploaded(false);
-        if(!isLoading) {
-            message.success('Product created successfully!');
-            form.resetFields();
-        }
-        if(error) {
-            message.error('Error creating product. Please try again!');
-        }
+      dataForm.media = uploadedMediaUrls;
+      createProduct(dataForm);
+      setIsSubmitting(isLoading);
+      setIsMediaUploaded(false);
+      if(!isLoading) {
+        message.success('Product created successfully!');
+        form.resetFields();
+      }
+      if(error) {
+        message.error('Error creating product. Please try again!');
+      }
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [uploadedMediaUrls, isMediaUploaded]);
+  }, [uploadedMediaUrls, isMediaUploaded, dataForm, createProduct, error, form, isLoading]);
 
   const onFinish = async (values) => {
     setIsSubmitting(true);
@@ -107,15 +106,15 @@ const CreateProduct = () => {
             label="Description"
             rules={[{ required: true, message: 'Please input the product description!' }]}
           >
-            <ReactQuill theme="snow" />
+            <RichTextArea onChange={setRichTextValue} value={richTextArea} />
           </Form.Item>
 
           <Form.Item
             name="price"
             label="Price"
-            rules={[                                                                                                         
-                { required: true, message: 'Please input the product price!' },                                                
-                { type: 'number', min: 0, message: 'Price must be a positive number!' }                                        
+            rules={[
+              { required: true, message: 'Please input the product price!' },
+              { type: 'number', min: 0, message: 'Price must be a positive number!' }
             ]}
           >
             <InputNumber
@@ -127,7 +126,7 @@ const CreateProduct = () => {
 
           <Form.Item
             name="media"
-            label="Media"
+            label="Additional Media"
             valuePropName="fileList"
             getValueFromEvent={normFile}
             rules={[{ required: true, message: 'Please upload at least one image!' }]}
@@ -150,11 +149,11 @@ const CreateProduct = () => {
             label="Product Type"
           >
             <Select placeholder="Select a product type">
-            {productTypes?.map((type, index) => (
+              {productTypes?.map((type, index) => (
                 <Option key={index} value={type}>
-                    {type}
+                  {type}
                 </Option>
-            ))}
+              ))}
             </Select>
           </Form.Item>
 
@@ -163,17 +162,17 @@ const CreateProduct = () => {
             label="Tags"
           >
             <Select mode="tags" style={{ width: '100%' }} placeholder="Product tags">
-            {productTags?.map((tag, index) => (
+              {productTags?.map((tag, index) => (
                 <Option key={index} value={tag}>
-                    {tag}
+                  {tag}
                 </Option>
-            ))}
+              ))}
             </Select>
           </Form.Item>
 
-            <Button type="primary" htmlType="submit" className="w-full" loading={isSubmitting} disabled={isSubmitting}>
-                Create Product
-            </Button>
+          <Button type="primary" htmlType="submit" className="w-full" loading={isSubmitting} disabled={isSubmitting}>
+            Create Product
+          </Button>
         </Form>
       </div>
     </>
