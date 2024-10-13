@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, useRef } from 'react';
 import ReactQuill, { Quill } from 'react-quill';
 import ImageUploader from "quill-image-uploader";
 import 'react-quill/dist/quill.snow.css';
@@ -10,6 +10,7 @@ Quill.register("modules/imageUploader", ImageUploader);
 const RichTextArea = ({ onChange, value }) => {
     const [editorContent, setEditorContent] = useState('');
     const { uploadSingleMedia } = useUploadMedia();
+    const quillRef = useRef(null);
 
     const modules = useMemo(
         () => ({
@@ -19,7 +20,7 @@ const RichTextArea = ({ onChange, value }) => {
             [{ header: 1 }, { header: 2 }], // custom button values
             [{ list: "ordered" }, { list: "bullet" }],
             [{ header: [1, 2, 3, 4, 5, 6, false] }],
-            ["link", "image"],
+            ["link", "image", "video"],
           ],
           imageUploader: {
             upload: async (file) => {
@@ -43,18 +44,21 @@ const RichTextArea = ({ onChange, value }) => {
         if (value !== editorContent) {
             setEditorContent(value);
         }
-    }
-    , [value, editorContent]);
+    }, [value, editorContent]);
 
     return (
-        <>
-            <ReactQuill theme="snow" modules={modules} value={editorContent} onChange={handleChange} />
-        </>
+        <ReactQuill
+            ref={quillRef}
+            value={editorContent}
+            onChange={handleChange}
+            modules={modules}
+        />
     );
 };
+
 RichTextArea.propTypes = {
     onChange: PropTypes.func,
-    value: PropTypes.string,
+    value: PropTypes.string
 };
 
 export default RichTextArea;

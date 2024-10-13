@@ -7,6 +7,7 @@ import useProductApi from '../../hooks/useProductApi';
 import useUploadMedia from '../../hooks/useUploadMedia';
 import { useNavigate, useParams } from 'react-router-dom';
 import RichTextArea from '../../components/richTextArea';
+import { validateUploadImage } from '../../helpers/validateForm';
 
 
 const { Option } = Select;
@@ -180,7 +181,7 @@ const UpdateProduct = () => {
               listType="picture-card"
               fileList={fileList}
               onChange={handleChange}
-              beforeUpload={() => false}
+              beforeUpload={(file) => validateUploadImage(file, Upload)}
             >
               {fileList.length >= 8 ? null : (
                 <div>

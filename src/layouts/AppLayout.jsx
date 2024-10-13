@@ -7,7 +7,6 @@ const { Header, Content, Footer } = Layout;
 const AppLayout = ({ children }) => {
   const location = useLocation();
 
-  // Define menu items using the `items` prop
   const menuItems = [
     {
       key: '/',
@@ -41,7 +40,7 @@ const AppLayout = ({ children }) => {
         </div>
       </Content>
       <Footer className="text-center">
-        © {new Date().getFullYear()} Your Company Name. All rights reserved.
+        © {new Date().getFullYear()} Unity In Diversity. All rights reserved.
       </Footer>
     </Layout>
   );

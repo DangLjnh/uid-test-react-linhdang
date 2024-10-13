@@ -6,6 +6,7 @@ import withLoadingIndicator from '../../hoc/withLoadingIndicator';
 import useProductApi from '../../hooks/useProductApi';
 import useUploadMedia from '../../hooks/useUploadMedia';
 import RichTextArea from '../../components/richTextArea';
+import { validateUploadImage } from '../../helpers/validateForm';
 
 const { Option } = Select;
 
@@ -135,7 +136,7 @@ const CreateProduct = () => {
               listType="picture-card"
               fileList={fileList}
               onChange={handleChange}
-              beforeUpload={() => false}
+              beforeUpload={(file) => validateUploadImage(file, Upload)}
             >
               <div>
                 <UploadOutlined />
