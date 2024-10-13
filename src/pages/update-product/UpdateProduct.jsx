@@ -15,7 +15,7 @@ const UpdateProduct = () => {
   const [form] = Form.useForm();
   const { id } = useParams();
   const navigate = useNavigate();
-  const { products, isLoading, error, fetchProduct, updateProduct } = useProductApi();
+  const { products, isLoading, error, fetchProduct, updateProduct, fetchProducts } = useProductApi();
   const { uploadMedia, uploadedMediaUrls } = useUploadMedia();
 
   const [fileList, setFileList] = useState([]);
@@ -70,6 +70,11 @@ const UpdateProduct = () => {
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [uploadedMediaUrls, isMediaUploaded]);
+
+  useEffect(() => {
+    fetchProducts();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const onFinish = async (values) => {
     setIsSubmitting(true);
