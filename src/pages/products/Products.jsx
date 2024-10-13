@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchProducts } from '../../states/actions/localStorageProductAction';
 import { Alert, Select, Spin, Table, Tag, Image, Button, Modal, message } from 'antd';
 import withLoadingIndicator from '../../hoc/withLoadingIndicator';
-import useProductApi from '../../hooks/useProductApi';
+import useLocalStorageProduct from '../../hooks/useLocalStorageProduct';
 import { useNavigate } from 'react-router-dom';
 
 const Products = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isLoading, error: errorProduct, deleteProduct } = useProductApi();
+  const { isLoading, error: errorProduct, deleteProduct } = useLocalStorageProduct();
 
   const { products, loading, error } = useSelector((state) => state.localStorageProducts);
   const [filteredProducts, setFilteredProducts] = useState([]);
