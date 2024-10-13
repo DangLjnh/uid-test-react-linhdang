@@ -1,15 +1,15 @@
 import { useState, useMemo, useEffect } from 'react';
 import ReactQuill, { Quill } from 'react-quill';
 import ImageUploader from "quill-image-uploader";
-import cloudinary from '../libs/cloudiary';
-import axios from 'axios';
 import 'react-quill/dist/quill.snow.css';
 import PropTypes from 'prop-types';
+import useUploadMedia from '../hooks/useUploadMedia';
 
 Quill.register("modules/imageUploader", ImageUploader);
 
 const RichTextArea = ({ onChange, value }) => {
     const [editorContent, setEditorContent] = useState('');
+    const { uploadSingleMedia } = useUploadMedia();
 
     const modules = useMemo(
         () => ({
@@ -23,21 +23,12 @@ const RichTextArea = ({ onChange, value }) => {
           ],
           imageUploader: {
             upload: async (file) => {
-              const bodyFormData = new FormData();
-              bodyFormData.append("file", file);
-              bodyFormData.append('upload_preset', 'uid_preset');
-              const response = await axios({
-                method: "post",
-                url: `https://api.cloudinary.com/v1_1/${cloudinary.config().cloud_name}/upload`,
-                data: bodyFormData,
-                headers: {
-                  "Content-Type": "multipart/form-data",
-                },
-              });
-              return response.data.secure_url;
+                const data = await uploadSingleMedia(file);
+                return data;
             },
           },
         }),
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         []
     );
 
